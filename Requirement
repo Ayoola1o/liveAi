@@ -1,0 +1,35 @@
+Of course. To run this application on your local machine, you'll need to set up a few things. Here is a breakdown of the requirements:
+1. Hardware Requirements
+Microphone: A functional microphone is essential for the voice chat feature.
+2. Software and Environment
+Modern Web Browser: You need an up-to-date browser like Google Chrome, Mozilla Firefox, or Microsoft Edge that supports:
+Web Audio API (for microphone access and audio processing).
+WebGL (for rendering the 3D visuals).
+ES Modules with Import Maps (which this project uses to load libraries like lit and three).
+Local Web Server: You cannot run this application by simply opening the index.html file in your browser (file://...). Browser security policies restrict microphone access and other features on local files. You must serve the project folder using a local web server.
+If you have Node.js installed, you can open a terminal in the project directory and run npx serve.
+If you have Python installed, you can run python3 -m http.server.
+This will host your application on a local address like http://localhost:3000.
+3. API Key Configuration
+Google Gemini API Key: The application requires a valid API key to communicate with the Gemini models.
+You can get a free key from Google AI Studio.
+The code expects this key to be available as process.env.GEMINI_API_KEY. Since you are running this in a browser locally, process.env will not be defined. You will need to manually edit the index.tsx file and replace process.env.GEMINI_API_KEY with your actual API key string:
+Generated javascript
+// In index.tsx, find this line:
+apiKey: process.env.GEMINI_API_KEY,
+
+// And change it to:
+apiKey: 'YOUR_API_KEY_HERE',
+Use code with caution.
+JavaScript
+Important: Be careful not to expose this key in public code repositories.
+4. Build/Compilation (Handling the .tsx file)
+The main application file is index.tsx, which is a TypeScript file. Browsers cannot execute TypeScript directly. The environment this app was designed for likely had an automatic compilation step.
+To run it locally, you must convert this file to JavaScript.
+Simple Method: Rename index.tsx to index.js. Then, open index.js and manually remove all the TypeScript type annotations (e.g., : string, : Session, : LiveServerMessage, etc.). The rest of the code is standard JavaScript that the browser can run.
+Add Script to HTML: You will also need to add a script tag to your index.html file to load the JavaScript module. Add this line inside the <body> tag:
+Generated html
+<script type="module" src="./index.js"></script>
+Use code with caution.
+Html
+In summary, the key steps are: get an API key, put it in the code, handle the TypeScript-to-JavaScript conversion, and run everything on a local web server.
